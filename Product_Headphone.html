@@ -149,6 +149,7 @@
         setTimeout(showSlides, 3000); // เปลี่ยนภาพทุก 3 วินาที
       }
     </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -240,24 +241,6 @@
       });
     </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const dropbtn = document.querySelector(".dropbtn");
-        const dropdownContent = document.querySelector(".dropdown-content");
-
-        dropbtn.addEventListener("click", (event) => {
-          event.preventDefault();
-          dropdownContent.style.display =
-            dropdownContent.style.display === "block" ? "none" : "block";
-        });
-
-        window.addEventListener("click", (event) => {
-          if (!dropbtn.contains(event.target)) {
-            dropdownContent.style.display = "none";
-          }
-        });
-      });
-    </script>
 
     <footer>
       <div class="footer-container">

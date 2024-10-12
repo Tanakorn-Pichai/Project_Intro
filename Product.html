@@ -150,114 +150,109 @@
       }
     </script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
-
-        addToCartButtons.forEach((button, index) => {
-          button.addEventListener("click", () => {
-            const productItem = button.closest(".product-item");
-            const productName = productItem.querySelector("h3").innerText;
-            const productPrice = productItem
-              .querySelector("p")
-              .innerText.replace("$", "");
-            const productImage = productItem.querySelector("img").src;
-
-            // Clear the cart before adding a new item
-            localStorage.removeItem("cart");
-
-            const product = {
-              name: productName,
-              price: parseFloat(productPrice),
-              image: productImage,
-              quantity: 1,
-            };
-
-            // Store only the selected product
-            cart.length = 0; // Clear previous cart items
-            cart.push(product);
-            localStorage.setItem("cart", JSON.stringify(cart));
-
-            // Redirect to cart.html after adding to cart
-            window.location.href = "cart.html";
+      document.addEventListener('DOMContentLoaded', () => {
+          const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+          const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+  
+          addToCartButtons.forEach((button, index) => {
+              button.addEventListener('click', () => {
+                  const productItem = button.closest('.product-item');
+                  const productName = productItem.querySelector('h3').innerText;
+                  const productPrice = productItem.querySelector('p').innerText.replace('฿', '');
+                  const productImage = productItem.querySelector('img').src;
+  
+                  // Clear the cart before adding a new item
+                  localStorage.removeItem('cart');
+  
+                  const product = {
+                      name: productName,
+                      price: parseFloat(productPrice),
+                      image: productImage,
+                      quantity: 1
+                  };
+  
+                  // Store only the selected product
+                  cart.length = 0; // Clear previous cart items
+                  cart.push(product);
+                  localStorage.setItem('cart', JSON.stringify(cart));
+  
+                  // Redirect to cart.html after adding to cart
+                  window.location.href = "cart.html";
+              });
           });
-        });
       });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-        const cartContainer = document.querySelector(".cart-container");
-        const totalPriceElement = document.getElementById("total-price");
-        let totalPrice = 0;
-
-        // Function to update total price
-        const updateTotalPrice = () => {
-          totalPrice = 0;
-          cartItems.forEach((item) => {
-            totalPrice += item.price * item.quantity;
+  </script>    
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+          const cartContainer = document.querySelector('.cart-container');
+          const totalPriceElement = document.getElementById('total-price');
+          let totalPrice = 0;
+  
+          // Function to update total price
+          const updateTotalPrice = () => {
+              totalPrice = 0;
+              cartItems.forEach(item => {
+                  totalPrice += item.price * item.quantity;
+              });
+              totalPriceElement.innerText = `฿${totalPrice.toFixed(2)}`;
+          };
+  
+          // Increase item quantity
+          const increaseQuantity = (index) => {
+              cartItems[index].quantity += 1;
+              localStorage.setItem('cart', JSON.stringify(cartItems));
+              renderCartItems();
+          };
+  
+          // Decrease item quantity
+          const decreaseQuantity = (index) => {
+              if (cartItems[index].quantity > 1) {
+                  cartItems[index].quantity -= 1;
+                  localStorage.setItem('cart', JSON.stringify(cartItems));
+                  renderCartItems();
+              }
+          };
+  
+          // Event listener for button clicks
+          cartContainer.addEventListener('click', (event) => {
+              if (event.target.classList.contains('increase-btn')) {
+                  const index = event.target.getAttribute('data-index');
+                  increaseQuantity(index);
+              } else if (event.target.classList.contains('decrease-btn')) {
+                  const index = event.target.getAttribute('data-index');
+                  decreaseQuantity(index);
+              }
           });
-          totalPriceElement.innerText = `฿${totalPrice.toFixed(2)}`;
-        };
-
-        // Increase item quantity
-        const increaseQuantity = (index) => {
-          cartItems[index].quantity += 1;
-          localStorage.setItem("cart", JSON.stringify(cartItems));
+  
+          // Event listener for checkout button
+          document.querySelector('.checkout-btn').addEventListener('click', () => {
+              window.location.href = 'checkout.html'; // Redirect to checkout.html
+          });
+  
+          // Render items on page load
           renderCartItems();
-        };
-
-        // Decrease item quantity
-        const decreaseQuantity = (index) => {
-          if (cartItems[index].quantity > 1) {
-            cartItems[index].quantity -= 1;
-            localStorage.setItem("cart", JSON.stringify(cartItems));
-            renderCartItems();
-          }
-        };
-
-        // Event listener for button clicks
-        cartContainer.addEventListener("click", (event) => {
-          if (event.target.classList.contains("increase-btn")) {
-            const index = event.target.getAttribute("data-index");
-            increaseQuantity(index);
-          } else if (event.target.classList.contains("decrease-btn")) {
-            const index = event.target.getAttribute("data-index");
-            decreaseQuantity(index);
-          }
-        });
-
-        // Event listener for checkout button
-        document
-          .querySelector(".checkout-btn")
-          .addEventListener("click", () => {
-            window.location.href = "checkout.html"; // Redirect to checkout.html
+      });
+  </script>
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const dropbtn = document.querySelector('.dropbtn');
+          const dropdownContent = document.querySelector('.dropdown-content');
+      
+          dropbtn.addEventListener('click', (event) => {
+              event.preventDefault();
+              dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
           });
-
-        // Render items on page load
-        renderCartItems();
+      
+          window.addEventListener('click', (event) => {
+              if (!dropbtn.contains(event.target)) {
+                  dropdownContent.style.display = 'none';
+              }
+          });
       });
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const dropbtn = document.querySelector(".dropbtn");
-        const dropdownContent = document.querySelector(".dropdown-content");
-
-        dropbtn.addEventListener("click", (event) => {
-          event.preventDefault();
-          dropdownContent.style.display =
-            dropdownContent.style.display === "block" ? "none" : "block";
-        });
-
-        window.addEventListener("click", (event) => {
-          if (!dropbtn.contains(event.target)) {
-            dropdownContent.style.display = "none";
-          }
-        });
-      });
-    </script>
+      
+</script>
 
     <footer>
       <div class="footer-container">
