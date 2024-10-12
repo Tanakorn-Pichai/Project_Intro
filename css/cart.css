@@ -1,18 +1,84 @@
-/* General styling */
+/* สไตล์สำหรับ body */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: rgb(240, 240, 240);
+    color: #343a40;
+    line-height: 1.6;
 }
 
+/* สไตล์สำหรับ header */
 header {
-    background-color: rgb(90, 90, 90); /* Changed to a modern green */
+    background-color: rgb(60, 60, 60);
     color: white;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.1);
 }
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* สไตล์สำหรับ nav */
+nav {
+    background-color: rgb(90, 90, 90);
+    overflow: hidden;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    position: relative; /* ปรับตำแหน่งของ dropdown */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: white;
+    display: inline-block;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    background-color: #e20808;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+/* สไตล์สำหรับ .header-right */
+.header-right {
+    float: right;
+}
+
+.header-right a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.header-right a:hover {
+    background-color: #e20808;
+    transition: background-color 0.3s ease;
+}
+
 
 h1 {
     margin: 0;
@@ -154,4 +220,44 @@ main {
     .quantity-control {
         justify-content: center;
     }
+}
+/* ปรับปรุงการแสดงผลของฟอร์มค้นหา */
+.search-form {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="text"] {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 30px;
+    outline: none;
+    width: 600px;
+    transition: width 0.3s ease;
+}
+
+
+
+.search-form button {
+    background-color: #e90000;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form button i {
+    font-size: 16px;
+}
+
+.search-form button:hover {
+    background-color: #eb0202;
 }
