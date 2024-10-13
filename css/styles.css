@@ -333,3 +333,13 @@ footer {
     background-color: #eb0202;
 }
 
+@media (max-width: 600px) {
+    .search-form input[type="text"] {
+        border: none;
+        padding: 8px 15px;
+        border-radius: 30px;
+        outline: none;
+        width: 100px;
+        transition: width 0.3s ease;
+    }
+}
