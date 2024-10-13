@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Address</title>
+    <link rel="stylesheet" href="css/address.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-bar">
+                <div class="logo">
+                    <h1>Gaming Gear</h1>
+                </div>
+                <div class="search-bar">
+                    <form>
+                        <input type="text" placeholder="ค้นหาสินค้า..." aria-label="search">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="nav-right">
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> ตะกร้าสินค้า</a>
+                    <a href="login.html"><i class="fas fa-user"></i> เข้าสู่ระบบ</a>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="index.html">หน้าแรก</a>
+                <a href="categories.html">หมวดหมู่สินค้า</a>
+            </nav>
+        </header>
+        
+        
+        <main>
+            <h3>แก้ไขที่อยู่</h3>
+            <form>
+                <label for="name">ชื่อ-นามสกุล:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">เบอร์โทรศัพท์:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="address">จังหวัด,อำเภอ,ตำบล,รหัสไปรษณีย์:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="details">บ้านเลขที่,ซอย,หมู่,ถนน:</label>
+                <input type="text" id="details" name="details" required>
+
+                <div class="buttons">
+                    <button type="button" class="cancel">ยกเลิก</button>
+                    <button type="submit" class="submit">ยืนยัน</button>
+                </div>
+            </form>
+        </main>
+        
+        <footer>
+            <p>Copyright © 2024</p>
+        </footer>
+    </div>
+</body>
+</html>
