@@ -348,4 +348,252 @@ footer {
 .search-form button:hover {
     background-color: #eb0202;
 }
+@media (max-width: 1400px) {
+    .container {
+        flex-direction: column; 
+    }
 
+    .sidebar {
+        width: 100%; /* ขยาย sidebar ให้กว้างเต็มจอ */
+        padding: 10px 0;
+        text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+        background-color: #333232;
+        border-radius: 0;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-direction: row; /* เปลี่ยนจากรายการแนวตั้งเป็นแนวนอน */
+        justify-content: space-around; /* กระจายลิงก์ให้ห่างเท่าๆ กัน */
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 0; /* ยกเลิกการเว้นช่องว่างระหว่างรายการ */
+    }
+
+    .sidebar ul li a {
+        font-size: 16px; /* ปรับขนาดข้อความถ้าจำเป็น */
+    }
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1500px;
+        margin: 40px auto;
+        padding: 0 20px;
+        margin-left: 20px;
+    }
+    
+    .product-grid  a {
+        text-decoration: none;
+    }
+    
+    .product-item {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .product-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+    
+    .product-item h3 {
+        font-size: 20px;
+        margin: 0 0 10px;
+        color: #333;
+    }
+    
+    .product-item p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    
+    .add-to-cart-btn {
+        display: inline-block;
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease;
+    }
+    
+    .add-to-cart-btn:hover {
+        background-color: #218838;
+    }
+    .search-form {
+        display: flex;
+        align-items: center;
+        border: 2px solid #ccc;
+        border-radius: 30px;
+        padding: 5px;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+    
+    .search-form input[type="text"] {
+        border: none;
+        padding: 8px 15px;
+        border-radius: 30px;
+        outline: none;
+        width: 100px;
+        transition: width 0.3s ease;
+    }
+    
+    
+    
+    .search-form button {
+        background-color: #e90000;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin-left: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .search-form button i {
+        font-size: 16px;
+    }
+    
+    .search-form button:hover {
+        background-color: #eb0202;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column; 
+    }
+
+    .sidebar {
+        width: 100%; /* ขยาย sidebar ให้กว้างเต็มจอ */
+        padding: 10px 0;
+        text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+        background-color: #333232;
+        border-radius: 0;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-direction: row; /* เปลี่ยนจากรายการแนวตั้งเป็นแนวนอน */
+        justify-content: space-around; /* กระจายลิงก์ให้ห่างเท่าๆ กัน */
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 0; /* ยกเลิกการเว้นช่องว่างระหว่างรายการ */
+    }
+
+    .sidebar ul li a {
+        font-size: 16px; /* ปรับขนาดข้อความถ้าจำเป็น */
+    }
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+        margin-left: 20px;
+    }
+    
+    .product-grid  a {
+        text-decoration: none;
+    }
+    
+    .product-item {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .product-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+    
+    .product-item h3 {
+        font-size: 20px;
+        margin: 0 0 10px;
+        color: #333;
+    }
+    
+    .product-item p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    
+    .add-to-cart-btn {
+        display: inline-block;
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease;
+    }
+    
+    .add-to-cart-btn:hover {
+        background-color: #218838;
+    }
+    .search-form {
+        display: flex;
+        align-items: center;
+        border: 2px solid #ccc;
+        border-radius: 30px;
+        padding: 5px;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+    
+    .search-form input[type="text"] {
+        border: none;
+        padding: 8px 15px;
+        border-radius: 30px;
+        outline: none;
+        width: 100px;
+        transition: width 0.3s ease;
+    }
+    
+    
+    
+    .search-form button {
+        background-color: #e90000;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin-left: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .search-form button i {
+        font-size: 16px;
+    }
+    
+    .search-form button:hover {
+        background-color: #eb0202;
+    }
+}

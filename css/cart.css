@@ -206,6 +206,7 @@ main {
 .remove-btn {
     display: inline-block;
     padding: 10px;
+    border: none;
     background-color: #fa0101;
     color: #fff;
     text-decoration: none;
@@ -216,27 +217,9 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.remove-btn {
-    background-color: #f76e6e;
-}
 
-/* Responsive styling */
-@media (max-width: 600px) {
-    .cart-item {
-        flex-direction: column;
-        text-align: center;
-        padding: 10px;
-    }
 
-    .cart-item img {
-        width: 100%;
-        margin-bottom: 10px;
-    }
 
-    .quantity-control {
-        justify-content: center;
-    }
-}
 /* ปรับปรุงการแสดงผลของฟอร์มค้นหา */
 .search-form {
     display: flex;
@@ -276,4 +259,45 @@ main {
 
 .search-form button:hover {
     background-color: #eb0202;
+}
+/* Responsive styling */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .cart-item img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .quantity-control {
+        justify-content: center;
+
+    }
+    .search-form input[type="text"] {
+        border: none;
+        padding: 8px 15px;
+        border-radius: 30px;
+        outline: none;
+        width: 100px;
+        transition: width 0.3s ease;
+    }
+    .remove-btn {
+        border: none;
+        display: inline-block;
+        margin-top: 25px;
+        padding: 10px;
+        background-color: #fa0101;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        width: 30%;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease;
+    }
+
 }
