@@ -1,81 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="css/checkout.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ชำระเงิน</title>
+    <link rel="stylesheet" href="css/checkout.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <h1>ชำระเงิน</h1>
-    </header>
-    
-    <main>
-        <section class="checkout-container">
-            <h2>รายการสินค้า</h2>
-            <div id="checkout-items">
-                <!-- รายการสินค้าจะแสดงที่นี่ -->
-            </div>
-        </section>
-
-        <section class="checkout-container">
-            <h2>ข้อมูลการติดต่อ</h2>
-            <form id="checkout-form">
-                <label for="name">ชื่อ-นามสกุล:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">อีเมล:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="address">ที่อยู่:</label>
-                <textarea id="address" name="address" rows="4" required></textarea>
-
-                <label for="phone">เบอร์โทรศัพท์:</label>
-                <input type="tel" id="phone" name="phone" required>
-
-                <button type="submit">ยืนยันการสั่งซื้อ</button>
+      <h1>Gaming Gear</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="Product.html">หมวดหมู่สินค้า</a></li>
+          <li>
+            <form class="search-form" action="search.html" method="get">
+              <input type="text" name="q" placeholder="ค้นหาสินค้า..." />
+              <button type="submit"><i class="fas fa-search"></i></button>
             </form>
-        </section>
+          </li>
+          <li class="header-right">
+            <a href="cart.html" style="color: red"
+              ><i class="fas fa-shopping-cart"></i> ตะกร้าสินค้า</a
+            >
+            <a href="#"><i class="fas fa-user"></i> เข้าสู่ระบบ</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="shipping-info">
+        <h2>ข้อมูลที่อยู่ในการจัดส่ง</h2>
+        <form id="shipping-form">
+          <label for="name">ชื่อผู้รับ:</label>
+          <input type="text" id="name" required />
+
+          <label for="address">ที่อยู่:</label>
+          <textarea id="address" required></textarea>
+
+          <label for="phone">หมายเลขโทรศัพท์:</label>
+          <input type="tel" id="phone" required />
+
+          <h3>เลือกรับสินค้า</h3>
+          <label>
+            <input type="radio" name="pickup" value="รับเองที่ร้าน" checked />
+            รับเองที่ร้าน
+          </label>
+          <label>
+            <input type="radio" name="pickup" value="จัดส่ง" /> จัดส่ง
+          </label>
+
+          <h3>เลือกวิธีชำระเงิน</h3>
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              value="cash-on-delivery"
+              checked
+            />
+            เก็บปลายทาง
+          </label>
+          <label>
+            <input type="radio" name="payment" value="promptpay" /> พร้อมเพย์
+          </label>
+
+          <button type="submit">บันทึกข้อมูลที่อยู่</button>
+        </form>
+      </section>
+
+      <section class="order-summary">
+        <h2>สรุปคำสั่งซื้อ</h2>
+        <div class="cart-container">
+          <!-- ตรงนี้จะแสดงรายการสินค้าที่เลือก -->
+        </div>
+        <div class="cart-summary">
+          <p>รวมทั้งหมด: <span id="total-price">฿0.00</span></p>
+          <button class="confirm-btn">ยืนยันการชำระเงิน</button>
+        </div>
+      </section>
     </main>
 
     <script>
-        // ดึงข้อมูลสินค้าจาก localStorage
-        const checkoutItems = JSON.parse(localStorage.getItem('buyNowItem')) || [];
-        
-        const checkoutItemsContainer = document.getElementById('checkout-items');
+      // ดึงข้อมูลสินค้าจาก localStorage
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
-        // Function to render checkout items
-        const renderCheckoutItems = () => {
-            checkoutItemsContainer.innerHTML = ''; // Clear previous items
-            checkoutItems.forEach(item => {
-                const itemElement = `
-                    <div class="checkout-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="checkout-item-details">
+      const cartContainer = document.querySelector(".cart-container");
+      const totalPriceElement = document.getElementById("total-price");
+      let totalPrice = 0;
+
+      // Function to update the total price
+      const updateTotalPrice = () => {
+        totalPrice = 0;
+        cartItems.forEach((item) => {
+          totalPrice += item.price * item.quantity;
+        });
+        totalPriceElement.innerText = `฿${totalPrice.toFixed(2)}`;
+      };
+
+      // Render the cart items
+      const renderCartItems = () => {
+        cartContainer.innerHTML = ""; // Clear previous items
+        cartItems.forEach((item) => {
+          const itemElement = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${
+            item.name
+          }" style="width: 100px;">
+                        <div class="cart-item-details">
                             <h3>${item.name}</h3>
-                            <p>แบรนด์: ${item.brand}</p>
-                            <p>รหัสสินค้า: ${item.sku}</p>
-                            <p>ราคา: ฿${item.price.toFixed(2)}</p>
-                            <p>จำนวน: ${item.quantity}</p>
-                            <p>รวม: ฿${(item.price * item.quantity).toFixed(2)}</p>
+                            <p>ราคา: ฿${item.price.toFixed(2)} x ${
+            item.quantity
+          }</p>
                         </div>
                     </div>
                 `;
-                checkoutItemsContainer.innerHTML += itemElement;
-            });
-        };
+          cartContainer.innerHTML += itemElement;
+        });
+        updateTotalPrice();
+      };
 
-        // Event listener for form submission
-        document.getElementById('checkout-form').addEventListener('submit', (event) => {
-            event.preventDefault();
-            // Handle form submission
-            alert('Order confirmed!'); // For demo purposes
-            localStorage.removeItem('buyNowItem'); // Clear cart after checkout
+      // Event listener for form submission
+      document
+        .getElementById("shipping-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault(); // Prevent the form from submitting the traditional way
+          alert("บันทึกข้อมูลที่อยู่เรียบร้อยแล้ว");
+          // You can add further actions here, like navigating to a confirmation page
         });
 
-        // Render items on page load
-        renderCheckoutItems();
+      // Event listener for confirm payment button
+      document.querySelector(".confirm-btn").addEventListener("click", () => {
+        const paymentMethod = document.querySelector(
+          'input[name="payment"]:checked'
+        ).value;
+
+        // ดึงข้อมูลบิลเก่าจาก localStorage
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        // เก็บข้อมูลสินค้าและบิลใหม่
+        const newOrder = {
+          items: cartItems, // รายการสินค้าจากตะกร้า
+          totalPrice: totalPrice, // ราคาสินค้ารวมทั้งหมด
+          paymentMethod: paymentMethod, // วิธีการชำระเงิน
+          status:
+            paymentMethod === "promptpay"
+              ? "กำลังจัดส่ง / ชำระเงินแล้ว"
+              : "กำลังจัดส่ง / ยังไม่ได้ชำระ", // สถานะสินค้า
+          date: new Date().toLocaleString(), // เวลาที่ทำการสั่งซื้อ
+        };
+
+        // เพิ่มบิลใหม่เข้าไปในรายการบิลทั้งหมด
+        orders.push(newOrder);
+        localStorage.setItem("orders", JSON.stringify(orders)); // บันทึกบิลใหม่ลงใน localStorage
+
+        // ล้างข้อมูลตะกร้าสินค้า
+        localStorage.removeItem("cart");
+
+        // Redirect ตามวิธีการชำระเงิน
+        if (paymentMethod === "promptpay") {
+          localStorage.setItem("paymentMethod", "qr");
+          window.location.href = "Payment.html";
+        } else {
+          localStorage.setItem("paymentMethod", "cod");
+          window.location.href = "status.html";
+        }
+      });
+
+      // Render items on page load
+      renderCartItems();
     </script>
-</body>
+  </body>
 </html>

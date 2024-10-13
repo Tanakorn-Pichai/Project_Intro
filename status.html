@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>สถานะการสั่งซื้อ</title>
+    <link rel="stylesheet" href="css/cart.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .status {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Gaming Gear</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="Product.html">หมวดหมู่สินค้า</a></li>
+          <li>
+            <form class="search-form" action="search.html" method="get">
+                <input type="text" name="q" placeholder="ค้นหาสินค้า...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </li>
+          <li>
+            <a href="cart.html" style="color: red"
+              ><i class="fas fa-shopping-cart"></i> ตะกร้าสินค้า</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-user"></i> เข้าสู่ระบบ</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    
+        <main>
+            <section id="order-container">
+                <!-- ตรงนี้จะแสดงบิลทั้งหมด -->
+            </section>
+        </main>
+
+    <script>
+      // ดึงข้อมูลบิลทั้งหมดจาก localStorage
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+      const orderContainer = document.getElementById("order-container");
+
+      // Function to render all orders
+      const renderOrders = () => {
+        orderContainer.innerHTML = ""; // Clear previous orders
+
+        orders.forEach((order, index) => {
+          let orderItemsHTML = "";
+
+          order.items.forEach((item) => {
+            const itemTotal = item.price * item.quantity;
+            orderItemsHTML += `
+                <tr>
+                    <td><img src="${item.image}" alt="${
+              item.name
+            }" style="width: 100px;"></td>
+                    <td>${item.name}</td>
+                    <td>฿${item.price.toFixed(2)}</td>
+                    <td>${item.quantity}</td>
+                    <td>฿${itemTotal.toFixed(2)}</td>
+                </tr>
+            `;
+          });
+
+          const orderHTML = `
+            <div class="order">
+                <h3>บิลที่ ${index + 1} - วันที่: ${order.date}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>รูปภาพ</th>
+                            <th>ชื่อสินค้า</th>
+                            <th>ราคาต่อชิ้น</th>
+                            <th>จำนวน</th>
+                            <th>ราคารวม</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${orderItemsHTML}
+                    </tbody>
+                </table>
+                <p>ราคารวมทั้งหมด: ฿${order.totalPrice.toFixed(2)}</p>
+                <p>สถานะ: ${order.status}</p>
+            </div>
+            <hr>
+        `;
+
+          orderContainer.innerHTML += orderHTML;
+        });
+      };
+
+      // Render orders on page load
+      renderOrders();
+    </script>
+  </body>
+</html>
