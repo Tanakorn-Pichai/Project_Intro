@@ -81,7 +81,7 @@ input[type="password"] {
     font-size: 16px;
 }
 
-button {
+.login-btn {
     width: 100%;
     padding: 15px;
     background-color: #333;
@@ -91,9 +91,10 @@ button {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+    text-decoration: none;
 }
 
-button:hover {
+.login-btn:hover {
     background-color: #555;
 }
 
