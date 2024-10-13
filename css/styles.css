@@ -150,6 +150,9 @@ nav ul li a:hover {
     margin: 40px auto;
     padding: 0 20px;
 }
+.product-grid  a {
+    text-decoration: none;
+}
 
 .product-item {
     background-color: #fff;

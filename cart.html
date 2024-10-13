@@ -59,42 +59,44 @@
             totalPriceElement.innerText = `฿${totalPrice.toFixed(2)}`;
         };
 
-        // Function to render cart items
-        const renderCartItems = () => {
-            cartContainer.innerHTML = ''; // Clear previous items
-            cartItems.forEach((item, index) => {
-                const itemElement = `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}" style="width: 100px;">
-                        <div class="cart-item-details">
-                            <h3>${item.name}</h3>
-                            <p>ราคา: ฿${item.price.toFixed(2)}</p>
-                            <div class="quantity-control">
-                                <button class="decrease-btn" data-index="${index}">-</button>
-                                <input type="number" value="${item.quantity}" data-index="${index}" min="1" class="quantity-input" style="width: 40px;">
-                                <button class="increase-btn" data-index="${index}">+</button>
-                            </div>
+       // Render the cart items and update total price
+       const renderCartItems = () => {
+        cartContainer.innerHTML = ''; // Clear previous items
+        cartItems.forEach((item, index) => {
+            const itemElement = `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" style="width: 100px;">
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>ราคา: ฿${item.price.toFixed(2)}</p>
+                        <div class="quantity-control">
+                            <button class="decrease-btn" data-index="${index}">-</button>
+                            <input type="number" value="${item.quantity}" data-index="${index}" min="1" class="quantity-input" style="width: 40px;">
+                            <button class="increase-btn" data-index="${index}">+</button>
                         </div>
                     </div>
-                `;
-                cartContainer.innerHTML += itemElement;
-            });
-            updateTotalPrice();
-        };
+                </div>
+            `;
+            cartContainer.innerHTML += itemElement;
+        });
+        updateTotalPrice();
+    };
 
-        // Increase item quantity
-        const increaseQuantity = (index) => {
-            cartItems[index].quantity += 1;
+    // Increase item quantity
+    const increaseQuantity = (index) => {
+        cartItems[index].quantity += 1;
+        localStorage.setItem('cart', JSON.stringify(cartItems)); // Save updated cart
+        renderCartItems();
+    };
+
+    // Decrease item quantity
+    const decreaseQuantity = (index) => {
+        if (cartItems[index].quantity > 1) {
+            cartItems[index].quantity -= 1;
+            localStorage.setItem('cart', JSON.stringify(cartItems)); // Save updated cart
             renderCartItems();
-        };
-
-        // Decrease item quantity
-        const decreaseQuantity = (index) => {
-            if (cartItems[index].quantity > 1) {
-                cartItems[index].quantity -= 1;
-                renderCartItems();
-            }
-        };
+        }
+    };
 
         // Event listener for button clicks
         cartContainer.addEventListener('click', (event) => {
