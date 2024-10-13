@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ชำระเงิน</title>
+    <title>Gaming Gear</title>
     <link rel="stylesheet" href="css/checkout.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link rel="icon" type="image/png" href="img/GameingG.png" />
   </head>
+
   <body>
     <header>
       <h1>Gaming Gear</h1>
@@ -24,6 +26,7 @@
             </form>
           </li>
           <li class="header-right">
+            <a href="status.html">คำสั่งซื้อ</a>
             <a href="cart.html" style="color: red"
               ><i class="fas fa-shopping-cart"></i> ตะกร้าสินค้า</a
             >
@@ -65,7 +68,7 @@
             />
             เก็บปลายทาง
           </label>
-          <label>
+          <label class="radio-label">
             <input type="radio" name="payment" value="promptpay" /> พร้อมเพย์
           </label>
 
@@ -135,9 +138,19 @@
 
       // Event listener for confirm payment button
       document.querySelector(".confirm-btn").addEventListener("click", () => {
+        // ดึงข้อมูลจากฟอร์มการจัดส่ง
+        const fullName = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const phoneNumber = document.getElementById("phone").value.trim();
         const paymentMethod = document.querySelector(
           'input[name="payment"]:checked'
         ).value;
+
+        // ตรวจสอบว่าข้อมูลในฟอร์มทุกช่องถูกกรอกครบ
+        if (!fullName || !address || !phoneNumber) {
+          alert("กรุณากรอกข้อมูลให้ครบทุกช่องก่อนทำการชำระเงิน");
+          return; // หยุดการทำงานหากข้อมูลไม่ครบ
+        }
 
         // ดึงข้อมูลบิลเก่าจาก localStorage
         let orders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -152,6 +165,11 @@
               ? "กำลังจัดส่ง / ชำระเงินแล้ว"
               : "กำลังจัดส่ง / ยังไม่ได้ชำระ", // สถานะสินค้า
           date: new Date().toLocaleString(), // เวลาที่ทำการสั่งซื้อ
+          shippingInfo: {
+            fullName: fullName,
+            address: address,
+            phoneNumber: phoneNumber,
+          }, // ข้อมูลที่อยู่จัดส่ง
         };
 
         // เพิ่มบิลใหม่เข้าไปในรายการบิลทั้งหมด
@@ -170,7 +188,6 @@
           window.location.href = "status.html";
         }
       });
-
       // Render items on page load
       renderCartItems();
     </script>
