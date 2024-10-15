@@ -74,6 +74,7 @@
 
       // Render the cart items and update total price
       const renderCartItems = () => {
+        cartContainer.innerHTML = "";
         if (cartItems.length === 0) {
           // ถ้าไม่มีสินค้าในตะกร้า
           cartContainer.innerHTML = "<p style='text-align: center; '>ไม่มีสินค้าในตะกร้า</p>";
