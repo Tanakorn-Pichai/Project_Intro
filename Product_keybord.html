@@ -10,6 +10,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="icon" type="image/png" href="img/GameingG.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
   </head>
   <body>
     <header>
@@ -169,6 +173,7 @@
         </div>
       </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
       /* JavaScript สำหรับการเลื่อนอัตโนมัติ */
       let slideIndex = 0;
@@ -225,8 +230,16 @@
             // Save the updated cart back to localStorage
             localStorage.setItem("cart", JSON.stringify(cart));
 
-            // // Redirect to # after adding to cart
+            // Redirect to # after adding to cart
             // window.location.href = "#";
+            Swal.fire({
+              title: "สำเร็จ!",
+              text: "เพิ่มสินค้าลงตะกร้าเรียบร้อย",
+              icon: "success",
+              confirmButtonText: "ตกลง",
+              timer: 3000, // ตั้งเวลาให้แสดง 3 วินาที
+              timerProgressBar: true, // แสดงโปรเกรสบาร์
+            });
           });
         });
       });
